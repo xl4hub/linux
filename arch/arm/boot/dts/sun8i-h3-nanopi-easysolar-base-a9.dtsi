@@ -66,7 +66,7 @@
 		always-running;
 	};
 
-	spi_clk: spi-clk {
+	can_clk: can-clk {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <20000000>;
@@ -105,11 +105,11 @@
 	can0: can@0 {
 		compatible = "microchip,mcp2518fd";
 		reg = <0>;
-		spi-max-frequency = <10000000>;
-		clocks = <&spi_clk>;
+		spi-max-frequency = <20000000>;
+		clocks = <&can_clk>;
 		interrupt-parent = <&pio>;
-		interrupts = <0 21 IRQ_TYPE_EDGE_FALLING>; /* PA21 */
-		gpio-controller;
+		interrupts = <0 21 IRQ_TYPE_LEVEL_LOW>; /* PA21 */
+		rx-int-gpios = <&pio 0 19 GPIO_ACTIVE_LOW>; /* PA19 */
 	};
 };
 
