@@ -135,18 +135,15 @@ static inline void sun6i_spi_disable_interrupt(struct sun6i_spi *sspi, u32 mask)
 	sun6i_spi_write(sspi, SUN6I_INT_CTL_REG, reg);
 }
 
-static inline void sun6i_spi_drain_fifo(struct sun6i_spi *sspi, int len)
+static inline void sun6i_spi_drain_fifo(struct sun6i_spi *sspi)
 {
-	u32 reg, cnt;
+	u32 reg, len;
 	u8 byte;
 
 	/* See how much data is available */
 	reg = sun6i_spi_read(sspi, SUN6I_FIFO_STA_REG);
 	reg &= SUN6I_FIFO_STA_RF_CNT_MASK;
-	cnt = reg >> SUN6I_FIFO_STA_RF_CNT_BITS;
-
-	if (len > cnt)
-		len = cnt;
+	len = reg >> SUN6I_FIFO_STA_RF_CNT_BITS;
 
 	while (len--) {
 		byte = readb(sspi->base_addr + SUN6I_RXDATA_REG);
@@ -347,14 +344,14 @@ static irqreturn_t sun6i_spi_handler(int irq, void *dev_id)
 	/* Transfer complete */
 	if (status & SUN6I_INT_CTL_TC) {
 		sun6i_spi_write(sspi, SUN6I_INT_STA_REG, SUN6I_INT_CTL_TC);
-		sun6i_spi_drain_fifo(sspi, sspi->fifo_depth);
+		sun6i_spi_drain_fifo(sspi);
 		complete(&sspi->done);
 		return IRQ_HANDLED;
 	}
 
 	/* Receive FIFO 3/4 full */
 	if (status & SUN6I_INT_CTL_RF_RDY) {
-		sun6i_spi_drain_fifo(sspi, SUN6I_FIFO_DEPTH);
+		sun6i_spi_drain_fifo(sspi);
 		/* Only clear the interrupt _after_ draining the FIFO */
 		sun6i_spi_write(sspi, SUN6I_INT_STA_REG, SUN6I_INT_CTL_RF_RDY);
 		return IRQ_HANDLED;
