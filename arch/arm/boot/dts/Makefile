@@ -1035,10 +1035,16 @@ dtb-$(CONFIG_MACH_SUN8I) += \
 	sun8i-h3-bananapi-m2-plus.dtb \
 	sun8i-h3-beelink-x2.dtb \
 	sun8i-h3-libretech-all-h3-cc.dtb \
+	sun8i-h3-nanopi-easysolar-a9.dtb \
+	sun8i-h3-nanopi-easysolar.dtb \
 	sun8i-h3-nanopi-m1.dtb	\
 	sun8i-h3-nanopi-m1-plus.dtb \
+	sun8i-h3-nanopi-maxi-gx-a9.dtb \
+	sun8i-h3-nanopi-maxi-gx.dtb \
 	sun8i-h3-nanopi-neo.dtb \
 	sun8i-h3-nanopi-neo-air.dtb \
+	sun8i-h3-nanopi-paygo.dtb \
+	sun8i-h3-nanopi-v4-smart-hub.dtb \
 	sun8i-h3-orangepi-2.dtb \
 	sun8i-h3-orangepi-lite.dtb \
 	sun8i-h3-orangepi-one.dtb \
