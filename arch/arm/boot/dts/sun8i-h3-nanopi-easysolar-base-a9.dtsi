@@ -102,6 +102,9 @@
 &spi0 {
 	status = "okay";
 
+	assigned-clocks = <&ccu CLK_SPI0>;
+	assigned-clock-rates = <600000000>;
+
 	can0: can@0 {
 		compatible = "microchip,mcp2518fd";
 		reg = <0>;
