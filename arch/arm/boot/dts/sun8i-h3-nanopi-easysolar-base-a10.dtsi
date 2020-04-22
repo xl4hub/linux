@@ -108,7 +108,7 @@
 		spi-max-frequency = <20000000>;
 		clocks = <&can_clk>;
 		interrupt-parent = <&pio>;
-		interrupts = <0 21 IRQ_TYPE_EDGE_FALLING>; /* PA21 */
+		interrupts = <0 21 IRQ_TYPE_LEVEL_LOW>; /* PA21 */
 		gpio-controller;
 	};
 };
