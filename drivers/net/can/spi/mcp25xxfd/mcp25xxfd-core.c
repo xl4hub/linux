@@ -485,7 +485,7 @@ __mcp25xxfd_chip_set_mode(const struct mcp25xxfd_priv *priv,
 				       FIELD_GET(MCP25XXFD_REG_CON_OPMOD_MASK,
 						 con) == mode_req,
 				       MCP25XXFD_POLL_SLEEP_US,
-				       MCP25XXFD_POLL_TIMEOUT_US);
+				       USEC_PER_SEC);
 	if (err) {
 		u8 mode = FIELD_GET(MCP25XXFD_REG_CON_OPMOD_MASK, con);
 
@@ -493,6 +493,9 @@ __mcp25xxfd_chip_set_mode(const struct mcp25xxfd_priv *priv,
 			   "Controller failed to enter mode %s Mode (%u) and stays in %s Mode (%u).\n",
 			   mcp25xxfd_get_mode_str(mode_req), mode_req,
 			   mcp25xxfd_get_mode_str(mode), mode);
+
+		mcp25xxfd_dump(priv);
+
 		return err;
 	}
 
