@@ -112,7 +112,7 @@
 		clocks = <&can_clk>;
 		interrupt-parent = <&pio>;
 		interrupts = <0 21 IRQ_TYPE_LEVEL_LOW>; /* PA21 */
-		rx-int-gpios = <&pio 0 19 GPIO_ACTIVE_LOW>; /* PA19 */
+		microchip,rx-int-gpios = <&pio 0 19 GPIO_ACTIVE_LOW>; /* PA19 */
 	};
 };
 
